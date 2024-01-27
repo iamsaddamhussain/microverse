@@ -1,5 +1,6 @@
 <script setup>
 import Dropdown from "@/Components/Dropdown.vue";
+import DropdownLink from "@/Components/DropdownLink.vue";
 import InputError from "@/Components/InputError.vue";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
 import { useForm } from "@inertiajs/vue3";
@@ -68,6 +69,13 @@ const editing = ref(false);
                         >
                             Edit
                         </button>
+                        <DropdownLink
+                            as="button"
+                            :href="route('post.destroy', post.id)"
+                            method="delete"
+                        >
+                            Delete
+                        </DropdownLink>
                     </template>
                 </Dropdown>
             </div>

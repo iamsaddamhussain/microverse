@@ -22,36 +22,12 @@ class PostController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      */
     public function store(PostRequest $request): RedirectResponse
     {
         $request->user()->post()->create($request->validated());
         return redirect(route('post.index'));
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(Post $post)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Post $post)
-    {
-        //
     }
 
     /**
@@ -68,8 +44,11 @@ class PostController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Post $post)
+    public function destroy(Post $post): RedirectResponse
     {
-        //
+        $this->authorize('delete', $post);
+        $post->delete();
+
+        return redirect(route('post.index'));
     }
 }
